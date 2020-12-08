@@ -107,7 +107,7 @@ class Boblight():
   def bob_setoption(self,option):
     ret = False
     if self.boblightLoaded and self.connected:
-      ret = c_int(self.libboblight.boblight_setoption(self.bobHandle, -1, option))  != 0
+      ret = c_int(self.libboblight.boblight_setoption(self.bobHandle, -1, option.encode('latin-1')))  != 0
     else:
       ret = True
     return ret

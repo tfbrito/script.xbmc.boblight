@@ -46,26 +46,27 @@ capture        = xbmc.RenderCapture()
 useLegacyApi   = True
 
 class MyPlayer( xbmc.Player ):
-  def __init__( self, *args, **kwargs ):
+  def __init__(self, monitor):
     xbmc.Player.__init__( self )
+    self.monitor = monitor
     self.playing = False
     log('MyPlayer - init')
         
   def onPlayBackStopped( self ):
     self.playing = False
-    myPlayerChanged( 'stop' )
+    myPlayerChanged('stop', self.monitor)
 
   def onPlayBackPaused( self ):
-    myPlayerChanged( 'paused' )
+    myPlayerChanged('paused', self.monitor)
 
   
   def onPlayBackEnded( self ):
     self.playing = False
-    myPlayerChanged( 'stop' )     
+    myPlayerChanged('stop', self.monitor)
   
   def onPlayBackStarted( self ):
     self.playing = True
-    myPlayerChanged( 'start' )
+    myPlayerChanged('start', self.monitor)
     if not useLegacyApi:
       capture.capture(capture_width, capture_height)
   
@@ -80,7 +81,7 @@ class MyMonitor( xbmc.Monitor ):
   def onSettingsChanged( self ):
     settings.start()
     if not settings.reconnect:
-      check_state()
+      check_state(self)
       
   def onScreensaverDeactivated( self ):
     settings.setScreensaver(False)
@@ -153,16 +154,16 @@ class Main():
   
     return loaded  
 
-def check_state(): 
+def check_state(monitor):
   if xbmc.Player().isPlaying():
     state = 'start'
   else:
     state = 'stop'  
-  myPlayerChanged( state )    
+  myPlayerChanged(state, monitor)
 
-def myPlayerChanged(state):
+def myPlayerChanged(state, monitor):
   log('PlayerChanged(%s)' % state)
-  xbmc.sleep(1000)
+  monitor.waitForAbort(1.0)
   if state == 'stop':
     ret = "static"
   else:
@@ -204,20 +205,20 @@ def myPlayerChanged(state):
 def run_boblight():
   main = Main()
   xbmc_monitor   = MyMonitor()
-  player_monitor = MyPlayer()
+  player_monitor = MyPlayer(xbmc_monitor)
   player_monitor.playing = xbmc.Player().isPlaying()
   if main.startup() == 0:
     if useLegacyApi:
       capture.capture(capture_width, capture_height, xbmc.CAPTURE_FLAG_CONTINUOUS)
 
-    while not xbmc.abortRequested:
-      xbmc.sleep(100)
+    while not xbmc_monitor.abortRequested():
+      xbmc_monitor.waitForAbort(0.1)
       if not settings.bobdisable:
         if not bob.bob_ping() or settings.reconnect:
           if not main.connectBoblight():
             continue
           if settings.bob_init():
-            check_state()
+            check_state(xbmc_monitor)
           settings.reconnect = False
           
         if not settings.staticBobActive:
