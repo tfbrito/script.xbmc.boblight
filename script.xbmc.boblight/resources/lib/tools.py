@@ -19,6 +19,7 @@
 
 import xbmc
 import xbmcgui
+import xbmcvfs
 import sys
 import os
 import urllib
@@ -29,7 +30,7 @@ __cwd__        = sys.modules[ "__main__" ].__cwd__
 __icon__       = sys.modules[ "__main__" ].__icon__
 __language__   = sys.modules[ "__main__" ].__language__
 
-__libbasepath__  = xbmc.translatePath(os.path.join(__cwd__,'resources','lib','%s') )
+__libbasepath__  = xbmcvfs.translatePath(os.path.join(__cwd__,'resources','lib','%s') )
 __libbaseurl__   = "http://mirrors.kodi.tv/build-deps/addon-deps/binaries/libboblight"
 
 def DownloaderClass(url,dest):
@@ -59,7 +60,7 @@ def tools_downloadLibBoblight(platformstr,allowNotify):
   try:
     DownloaderClass(url, dest + ".zip")
     log("%s -> %s" % (url, dest))
-    xbmc.executebuiltin('XBMC.Extract("%s.zip","%s")' % (dest, destdir), True)
+    xbmc.executebuiltin('Extract("%s.zip","%s")' % (dest, destdir), True)
     os.remove(dest + ".zip")
   except:
     if allowNotify:
@@ -110,7 +111,7 @@ def get_download_path(platformstr):
   if platformstr == "android" or platformstr == "androidx86":
     return "/data/data/org.xbmc.kodi/files/"
   else:
-    return xbmc.translatePath( os.path.join( __cwd__, 'resources', 'lib') )
+    return xbmcvfs.translatePath( os.path.join( __cwd__, 'resources', 'lib') )
 
 def get_libpath(platformstr):
   if platformstr == 'linux':
@@ -118,6 +119,6 @@ def get_libpath(platformstr):
   elif platformstr == 'android' or platformstr == 'androidx86':
     return "/data/data/org.xbmc.kodi/files/%s" % (get_libname(platformstr),)
   elif platformstr == 'tvos':
-    return "%s/system/%s" % (xbmc.translatePath("special://xbmc"),get_libname(platformstr),)
+    return "%s/system/%s" % (xbmcvfs.translatePath("special://xbmc"),get_libname(platformstr),)
   else:
     return __libbasepath__ % (get_libname(platformstr),)  
