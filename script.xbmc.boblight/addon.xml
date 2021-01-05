@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.xbmc.boblight" name="Kodi Boblight" version="2.0.19" provider-name="bobo1on1, Memphiz">
+<addon id="script.xbmc.boblight" name="Kodi Boblight" version="2.0.19" provider-name="bobo1on1, Memphiz, wrtlprnft">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -46,8 +46,9 @@
     <disclaimer lang="pl_PL">W celu poprawnego działania musisz mieć zainstalowaną odpowiednią bibliotekę dodatku.</disclaimer>
     <disclaimer lang="pt_PT">É necessário instalar o addon binário correcto para que isto funcione.</disclaimer>
     <platform>all</platform>
+    <license>GPL-3.0-or-later</license>
     <website>http://code.google.com/p/boblight/</website>
-    <source>https://github.com/bobo1on1/script.xbmc.boblight</source>
+    <source>https://github.com/wrtlprnft/script.xbmc.boblight</source>
     <forum>http://forum.kodi.tv/showthread.php?tid=116331</forum>
     <email></email>
     <assets>

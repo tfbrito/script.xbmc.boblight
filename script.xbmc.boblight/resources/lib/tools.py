@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 '''
     Boblight for Kodi
-    Copyright (C) 2012 Team XBMC
+    Copyright (C) 2012, 2020 Team XBMC, bobo1on1, Memphiz, wrtlprnft
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
