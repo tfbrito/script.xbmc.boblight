@@ -33,8 +33,9 @@ __libbasepath__  = xbmc.translatePath(os.path.join(__cwd__,'resources','lib','%s
 __libbaseurl__   = "http://mirrors.kodi.tv/build-deps/addon-deps/binaries/libboblight"
 
 def DownloaderClass(url,dest):
+    text = __language__(32511)
     dp = xbmcgui.DialogProgress()
-    dp.create(__scriptname__,"Downloading File",url)
+    dp.create(__scriptname__, text, url)
     urllib.urlretrieve(url,dest,lambda nb, bs, fs, url=url: _pbhook(nb,bs,fs,url,dp))
  
 def _pbhook(numblocks, blocksize, filesize, url=None,dp=None):

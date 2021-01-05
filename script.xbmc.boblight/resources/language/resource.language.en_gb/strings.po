@@ -212,7 +212,11 @@ msgctxt "#32510"
 msgid "Error downloading. Check filesystem permissions."
 msgstr ""
 
-#empty strings from id 32511 to 32599
+msgctxt "#32511"
+msgid "Downloading File"
+msgstr ""
+
+#empty strings from id 32512 to 32599
 #TVShows
 
 msgctxt "#32600"
