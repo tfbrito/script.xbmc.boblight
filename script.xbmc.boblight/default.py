@@ -63,7 +63,7 @@ class MyPlayer( xbmc.Player ):
     self.playing = False
     myPlayerChanged('stop', self.monitor)
   
-  def onPlayBackStarted( self ):
+  def onAVStarted( self ):
     self.playing = True
     myPlayerChanged('start', self.monitor)
     capture.capture(capture_width, capture_height)
