@@ -31,12 +31,9 @@ __ID__         = __addon__.getAddonInfo('id')
 __language__   = __addon__.getLocalizedString
 
 __profile__    = xbmcvfs.translatePath( __addon__.getAddonInfo('profile') )
-__resource__   = xbmc.translatePath( os.path.join( __cwd__, 'resources', 'lib' ) )
 
-sys.path.append (__resource__)
-
-from settings import *
-from tools import *
+from resources.lib.settings import *
+from resources.lib.tools import *
 
 log( "[%s] - Version: %s Started" % (__scriptname__,__version__))
 

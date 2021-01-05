@@ -27,8 +27,8 @@ __icon__       = sys.modules[ "__main__" ].__icon__
 __language__   = sys.modules[ "__main__" ].__language__
 __ID__   = sys.modules[ "__main__" ].__ID__
 
-from boblight import *
-from tools import log
+from resources.lib.boblight import *
+from resources.lib.tools import log
 
 bob = Boblight()
 
