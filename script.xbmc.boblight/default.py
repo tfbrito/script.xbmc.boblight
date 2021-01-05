@@ -104,10 +104,7 @@ class Main():
     if not ret:
       log("connection to boblightd failed: %s" % bob.bob_geterror())
       if self.warning < 3 and settings.other_misc_notifications:
-        xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,
-                                                                localize(32500),
-                                                                750,
-                                                                __icon__))
+        xbmcgui.Dialog().notification(__scriptname__, localize(32500), __icon__, 750)
         self.warning += 1
       settings.reconnect = True
       settings.run_init = True
@@ -116,10 +113,7 @@ class Main():
     else:
       self.warning = 0
       if settings.other_misc_notifications:
-        xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,
-                                                                localize(32501),
-                                                                750,
-                                                                __icon__))
+        xbmcgui.Dialog().notification(__scriptname__, localize(32501), __icon__, 750)
       log("connected to boblightd")
       bob.bob_set_priority(128)  
       return True
@@ -131,24 +125,17 @@ class Main():
   
     if loaded == 1:                                #libboblight not found                                               
       if platform == 'linux':
-        xbmcgui.Dialog().ok(__scriptname__,
-                            localize(32504),
-                            localize(32505),
-                            localize(32506))
+        xbmcgui.Dialog().ok(__scriptname__, localize(32504) + " " + localize(32505) + " " + localize(32506))
       
       else:
         # ask user if we should fetch the lib for osx, ios, android and windows
-        if xbmcgui.Dialog().yesno(__scriptname__,
-                                  localize(32504),
-                                  localize(32509)):
+        if xbmcgui.Dialog().yesno(__scriptname__, localize(32504) + " " + localize(32509)):
           tools_downloadLibBoblight(platform,settings.other_misc_notifications)
           loaded = bob.bob_loadLibBoblight(libpath,platform)
       
         
     elif loaded == 2:         #no ctypes available
-      xbmcgui.Dialog().ok(__scriptname__,
-                          localize(32507),
-                          localize(32508))
+      xbmcgui.Dialog().ok(__scriptname__, localize(32507) + " " + localize(32508))
   
     return loaded  
 

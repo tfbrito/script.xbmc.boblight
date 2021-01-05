@@ -64,7 +64,7 @@ def tools_downloadLibBoblight(platformstr,allowNotify):
   except:
     if allowNotify:
       text = __language__(32510)
-      xbmc.executebuiltin("XBMC.Notification(%s,%s,%s,%s)" % (__scriptname__,text,750,__icon__))
+      xbmcgui.Dialog().notification(__scriptname__, text, __icon__, 750)
 
 def log(msg):
   xbmc.log("### [%s] - %s" % (__scriptname__,msg,),level=xbmc.LOGDEBUG )
