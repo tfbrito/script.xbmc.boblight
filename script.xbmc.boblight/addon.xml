@@ -47,9 +47,9 @@
     <disclaimer lang="pt_PT">É necessário instalar o addon binário correcto para que isto funcione.</disclaimer>
     <platform>all</platform>
     <license>GPL-3.0-or-later</license>
-    <website>http://code.google.com/p/boblight/</website>
+    <website>https://code.google.com/archive/p/boblight</website>
     <source>https://github.com/wrtlprnft/script.xbmc.boblight</source>
-    <forum>http://forum.kodi.tv/showthread.php?tid=116331</forum>
+    <forum>https://forum.kodi.tv/showthread.php?tid=116331</forum>
     <assets>
       <icon>icon.png</icon>
     </assets>
