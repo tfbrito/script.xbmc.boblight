@@ -3,7 +3,7 @@
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
-  <extension point="xbmc.service" library="default.py" start="login"></extension>
+  <extension point="xbmc.service" library="default.py"></extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="ca">Connecta la sortida del Kodi a boblight</summary>
     <summary lang="de">Verbinde Kodi Ausgabe mit boblight</summary>
@@ -50,5 +50,8 @@
     <source>https://github.com/bobo1on1/script.xbmc.boblight</source>
     <forum>http://forum.kodi.tv/showthread.php?tid=116331</forum>
     <email></email>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
   </extension>
 </addon>
