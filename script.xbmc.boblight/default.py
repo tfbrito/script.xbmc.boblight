@@ -43,7 +43,6 @@ capture_width  = 32
 capture_height = 32
 settings       = settings()
 capture        = xbmc.RenderCapture()
-useLegacyApi   = True
 
 class MyPlayer( xbmc.Player ):
   def __init__(self, monitor):
@@ -67,8 +66,7 @@ class MyPlayer( xbmc.Player ):
   def onPlayBackStarted( self ):
     self.playing = True
     myPlayerChanged('start', self.monitor)
-    if not useLegacyApi:
-      capture.capture(capture_width, capture_height)
+    capture.capture(capture_width, capture_height)
   
   def isPlaying( self ):
     return self.playing
@@ -208,9 +206,6 @@ def run_boblight():
   player_monitor = MyPlayer(xbmc_monitor)
   player_monitor.playing = xbmc.Player().isPlaying()
   if main.startup() == 0:
-    if useLegacyApi:
-      capture.capture(capture_width, capture_height, xbmc.CAPTURE_FLAG_CONTINUOUS)
-
     while not xbmc_monitor.abortRequested():
       xbmc_monitor.waitForAbort(0.1)
       if not settings.bobdisable:
@@ -223,20 +218,13 @@ def run_boblight():
           
         if not settings.staticBobActive:
           startReadOut = False
-          if useLegacyApi:
-            capture.waitForCaptureStateChangeEvent(1000)
-            if capture.getCaptureState() == xbmc.CAPTURE_STATE_DONE and player_monitor.isPlaying():
-              startReadOut = True 
-          else:
-            pixels = capture.getImage(1000)
-            if len(pixels) > 0 and player_monitor.isPlaying():
-              startReadOut = True
+          pixels = capture.getImage(1000)
+          if len(pixels) > 0 and player_monitor.isPlaying():
+            startReadOut = True
 
           if startReadOut:
             width = capture.getWidth();
             height = capture.getHeight();
-            if useLegacyApi:
-              pixels = capture.getImage(1000)
 
             bob.bob_setscanrange(width, height)
             rgb = (c_int * 3)()
@@ -266,12 +254,6 @@ def localize(id):
     return __language__(id).encode('utf-8','ignore')
 
 if ( __name__ == "__main__" ):
-  try:
-    capture.getCaptureState()
-  except AttributeError:
-    useLegacyApi = False
   run_boblight()
   bob.bob_set_priority(255) # we are shutting down, kill the LEDs     
   bob.bob_destroy()
-
-
