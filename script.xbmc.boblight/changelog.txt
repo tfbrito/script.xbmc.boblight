@@ -1,6 +1,9 @@
 When adding changes here, also add them to addon.xml (shown in Kodi UI, but
 limited to 1500 characters).
 
+2.0.20
+- Fixed wrong return type
+
 2.0.19
 - added support for Kodi 19 (Matrix)
 
