@@ -236,7 +236,7 @@ def run_boblight():
   del xbmc_monitor
 
 def localize(id):
-    return __language__(id).encode('utf-8','ignore')
+    return __language__(id)
 
 if ( __name__ == "__main__" ):
   run_boblight()
